@@ -51,4 +51,4 @@ router.post(
   resetPassword
 );
 
-module.exports =router
+module.exports = router;

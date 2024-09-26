@@ -12,10 +12,11 @@ const userSchema = new Schema(
     password: {
       type: String,
     },
+    phone: {
+      type: String,
+    },
     IDImage: {
       type: String,
-      default:
-        "https://ik.imagekit.io/2crfufcjy/static/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcGYtaWNvbjQtamlyMjA2NC1wb3ItbC5qcGc.jpg?updatedAt=1726790573220",
     },
     isVerified: {
       type: Boolean,

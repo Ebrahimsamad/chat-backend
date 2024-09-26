@@ -8,7 +8,7 @@ const transporter = require("../utils/nodemialer");
 const crypto = require("crypto");
 
 exports.signup = async (req, res, next) => {
-  const { fullName, email, password } = req.body;
+  const { fullName, phone, email, password } = req.body;
 
   try {
     const existingUser = await User.findOne({ email });
@@ -19,6 +19,7 @@ exports.signup = async (req, res, next) => {
     const user = new User({
       fullName,
       email,
+      phone,
       password,
       IDImage: req.body.IDImage,
     });

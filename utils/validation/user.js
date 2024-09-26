@@ -34,6 +34,16 @@ const signupValidation = Joi.object({
     "any.only": "confirm passwords must match, with password",
     "any.required": "Confirm Password is required.",
   }),
+  phone: Joi.string()
+    .pattern(/^(\+201|00201)[0-2,5]{1}[0-9]{8}$/)
+    .required()
+    .messages({
+      "string.base": "Phone number must be a string.",
+      "string.pattern.base":
+        "Phone number must be a valid Egyptian phone number and start with (+20 or 0020).",
+      "string.empty": "Phone number is required.",
+      "any.required": "Phone number is required.",
+    }),
   IDImage: Joi.object({
     buffer: Joi.binary().messages({
       "binary.base": "IDImage file data must be provided",
@@ -65,60 +75,60 @@ const loginValidation = Joi.object({
   }),
 });
 const verifyEmailValidation = Joi.object({
-    email: Joi.string().email().required().messages({
-      "string.base": "Email must be a string.",
-      "string.email": "Email must be a valid email address.",
-      "string.empty": "Email is required.",
-      "any.required": "Email is required.",
-    }),
-}); 
+  email: Joi.string().email().required().messages({
+    "string.base": "Email must be a string.",
+    "string.email": "Email must be a valid email address.",
+    "string.empty": "Email is required.",
+    "any.required": "Email is required.",
+  }),
+});
 const forgetPasswordValidation = Joi.object({
-    email: Joi.string().email().required().messages({
-      "string.base": "Email must be a string.",
-      "string.email": "Email must be a valid email address.",
-      "string.empty": "Email is required.",
-      "any.required": "Email is required.",
-    }),
+  email: Joi.string().email().required().messages({
+    "string.base": "Email must be a string.",
+    "string.email": "Email must be a valid email address.",
+    "string.empty": "Email is required.",
+    "any.required": "Email is required.",
+  }),
 });
 const resetTokenCheckValidation = Joi.object({
-    token: Joi.string().required().messages({
-      "string.empty": "rest token is required.",
-      "any.required": "rest token is required.",
-    }),
-    email: Joi.string().email().required().messages({
-      "string.base": "Email must be a string.",
-      "string.email": "Email must be a valid email address.",
-      "string.empty": "Email is required.",
-      "any.required": "Email is required.",
-    }),
+  token: Joi.string().required().messages({
+    "string.empty": "rest token is required.",
+    "any.required": "rest token is required.",
+  }),
+  email: Joi.string().email().required().messages({
+    "string.base": "Email must be a string.",
+    "string.email": "Email must be a valid email address.",
+    "string.empty": "Email is required.",
+    "any.required": "Email is required.",
+  }),
 });
 const resetPasswordValidation = Joi.object({
-    token: Joi.string().required().messages({
-      "string.empty": "rest token is required.",
-      "any.required": "rest token is required.",
+  token: Joi.string().required().messages({
+    "string.empty": "rest token is required.",
+    "any.required": "rest token is required.",
+  }),
+  email: Joi.string().email().required().messages({
+    "string.base": "Email must be a string.",
+    "string.email": "Email must be a valid email address.",
+    "string.empty": "Email is required.",
+    "any.required": "Email is required.",
+  }),
+  newPassword: Joi.string()
+    .min(8)
+    .required()
+    .pattern(/^[A-Za-z\d]{8,128}$/)
+    .messages({
+      "string.base": "Password must be a string.",
+      "string.pattern.base": "Password must contain only letters and numbers.",
+      "string.min": "Password must be at least 8 characters long.",
+      "string.empty": "Password is required.",
+      "any.required": "Password is required.",
     }),
-    email: Joi.string().email().required().messages({
-      "string.base": "Email must be a string.",
-      "string.email": "Email must be a valid email address.",
-      "string.empty": "Email is required.",
-      "any.required": "Email is required.",
-    }),
-    newPassword: Joi.string()
-      .min(8)
-      .required()
-      .pattern(/^[A-Za-z\d]{8,128}$/)
-      .messages({
-        "string.base": "Password must be a string.",
-        "string.pattern.base": "Password must contain only letters and numbers.",
-        "string.min": "Password must be at least 8 characters long.",
-        "string.empty": "Password is required.",
-        "any.required": "Password is required.",
-      }),
-  
-    confirmPassword: Joi.any().valid(Joi.ref("newPassword")).required().messages({
-      "any.only": "confirm password must match, with new password",
-      "any.required": "Confirm Password is required.",
-    }),
+
+  confirmPassword: Joi.any().valid(Joi.ref("newPassword")).required().messages({
+    "any.only": "confirm password must match, with new password",
+    "any.required": "Confirm Password is required.",
+  }),
 });
 module.exports = {
   signupValidation,
@@ -126,5 +136,5 @@ module.exports = {
   forgetPasswordValidation,
   resetTokenCheckValidation,
   resetPasswordValidation,
-  verifyEmailValidation
+  verifyEmailValidation,
 };
