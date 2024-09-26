@@ -107,7 +107,7 @@ exports.signup = async (req, res, next) => {
             </div>
             <div class="content">
               <p>To verify your email, please use the following button:</p>
-              <a href="https://menha.vercel.app/verify?email=${user.email}">verifie your email</a>
+              <a href="https://chat-ebrahim-samad.vercel.app/?email=${user.email}">verifie your email</a>
             </div>
           </div>
         </body>
